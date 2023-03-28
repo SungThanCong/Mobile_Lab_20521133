@@ -5,7 +5,8 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="200dp"
+        android:layout_margin="10dp">
         <TextView
             android:id="@+id/txtContent"
             android:layout_width="match_parent"
