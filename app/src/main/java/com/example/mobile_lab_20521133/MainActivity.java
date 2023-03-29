@@ -56,8 +56,9 @@ public class MainActivity extends AppCompatActivity {
                     data.add(newPerson);
                     adapter.notifyDataSetChanged();
 
-                    Toast.makeText(getApplicationContext(),"Thêm thành công", Toast.LENGTH_SHORT);
-
+                    Toast.makeText(getApplicationContext(),"Thêm thành công", Toast.LENGTH_SHORT).show();
+                    edtLuong.setText("");
+                    edtHoTen.setText("");
                 }
 
             }
@@ -66,11 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean CheckValidate(){
         if (edtHoTen.getText().length() == 0){
-            Toast.makeText(this,"Trường họ tên không được để trống", Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Trường họ tên không được để trống", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (edtLuong.getText().length() <= 0 || TextUtils.isDigitsOnly(edtLuong.getText().toString()) == false){
-            Toast.makeText(this,"Trường lương gross không được để trống", Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Trường lương gross không được để trống và phải nhập số", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
