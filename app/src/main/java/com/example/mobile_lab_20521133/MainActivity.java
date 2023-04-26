@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.mobile_lab_20521133.Model.DBHelper;
 import com.example.mobile_lab_20521133.Model.Person;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private ListView lsvData;
     private ArrayList<String> personData;
     private ArrayAdapter<String> personAdapter;
-    FirebaseFirestore firestore;
+    private FirebaseFirestore firestore;
+    private DBHelper sqlite;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
         personData = new ArrayList<>();
+        sqlite = new DBHelper(this);
 
         AddControls();
         AddEvents();
@@ -127,6 +131,43 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+        btnAddSqlite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = edtName.getText().toString();
+                String phone = edtPhone.getText().toString();
+
+                if(name.length() <= 0 && phone.length() <= 0) {
+                    Toast.makeText(getApplicationContext(),"Input không được để trống",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(sqlite.addNewPerson(name,phone)){
+                    Toast.makeText(getApplicationContext(),"Thêm thành công",Toast.LENGTH_SHORT).show();
+                    edtName.setText("");
+                    edtPhone.setText("");
+                }else{
+                    Toast.makeText(getApplicationContext(),"Thêm không thành công",Toast.LENGTH_SHORT).show();
+
+                };
+
+            }
+        });
+
+        btnQuerySqlite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                personData.clear();
+
+                for (Person item : sqlite.showPerson())
+                {
+                    personData.add("Name: " +item.getFullName() + "\nPhone: "+ item.getPhoneNumber());
+                };
+                Toast.makeText(getApplicationContext(), "Lấy dữ liệu thành công", Toast.LENGTH_LONG).show();
+                personAdapter.notifyDataSetChanged();
+
+            }
+        });
 
     }
 
