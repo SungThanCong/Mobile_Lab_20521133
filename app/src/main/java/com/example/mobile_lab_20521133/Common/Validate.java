@@ -11,8 +11,7 @@ public class Validate {
         }
     }
     public static boolean ValidatePassword(String password){
-        String passwordRegex = "^{6,}$";
-        if(password.matches(passwordRegex)){
+        if(password.length() >= 6){
             return true;
         }
         else{
