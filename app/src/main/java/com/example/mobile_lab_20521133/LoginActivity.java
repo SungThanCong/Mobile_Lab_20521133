@@ -65,13 +65,18 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("username", username);
-                            editor.apply();
-                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                            startActivity(intent);
-                            Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_LONG).show();
+                            if(!task.getResult().isEmpty()){
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("username", username);
+                                editor.apply();
+                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_LONG).show();
 
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_LONG).show();
+                            }
+                            
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
