@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_LONG).show();
 
                             }else{
-                                Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Login failed",Toast.LENGTH_LONG).show();
                             }
                             
                         }
@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Login failed",Toast.LENGTH_LONG).show();
 
                         }
                     });
